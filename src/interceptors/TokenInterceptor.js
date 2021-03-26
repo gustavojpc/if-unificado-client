@@ -50,17 +50,17 @@ axios.interceptors.response.use(
     return response;
   },
   (error) => {
-    // // verifica se tem algum erro de token somente se tiver um response
-    // // algumas requisições não chegam a complemetar e com isso não geram um response
-    // if (error.response && checkAndTraitTokenError(error.response)) {
-    //   const errorData = {
-    //     error: 'messages.login.logoutInactive',
-    //   };
+    // verifica se tem algum erro de token somente se tiver um response
+    // algumas requisições não chegam a complemetar e com isso não geram um response
+    if (error.response && checkAndTraitTokenError(error.response)) {
+      const errorData = {
+        error: 'messages.login.logoutInactive',
+      };
 
-    //   // Se der erro de token substitui a chave de erro específca de token para uma
-    //   // gerénica de usário inativo
-    //   return Promise.reject(Object.assign({}, error, { response: { data: errorData } }));
-    // }
+      // Se der erro de token substitui a chave de erro específca de token para uma
+      // gerénica de usário inativo
+      return Promise.reject(Object.assign({}, error, { response: { data: errorData } }));
+    }
 
     return Promise.reject(error);
   },
