@@ -5,7 +5,7 @@ import axios from 'axios';
 // o spinner em todas requisições AJAX
 axios.interceptors.request.use(
   (config) => {
-    if (!Vue.$loaderOverlay.disabled && !config.data) {
+    if (!Vue.$loaderOverlay.disabled) {
       Vue.$loaderOverlay.show();
     }
     return config;
